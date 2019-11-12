@@ -11,6 +11,12 @@ License: https://www.wowthemes.net/freebies-license/
     padding: 1rem 0rem;
 }
 
+.author-name {
+    margin-left: -1rem;
+    color: #212529 !important;
+    font-weight: 400;
+}
+
 .active-page-link {
    color: #00ab6b;
 }
@@ -557,7 +563,6 @@ ul.tags li a:hover {
 
 .post-top-meta .btn.follow {
     margin-left: 5px;
-    margin-top: -4px;
 }
 
 .alertbar {

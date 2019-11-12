@@ -17,14 +17,13 @@ permalink: /:title/
 
 # Authors
 authors:
-  sal:
+  cupjoo:
     name: 최준영
     display_name: 최준영
     gravatar: e56154546cf4be74e393c62d1ae9f9d4
     email: cupjoo@gmail.com
     avatar: 'assets/images/avatar.jpg'
-    web: https://www.wowthemes.net
-    twitter: https://twitter.com/wowthemesnet
+    github: https://github.com/cupjoo
     description: "쌍문동 척척박사"
 
 # Plugins

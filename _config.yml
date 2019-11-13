@@ -1,6 +1,3 @@
-# todo
-# 광고 달기
-# About 작성
 
 # Site
 name: "오지는 컴퓨터 공부"
@@ -64,4 +61,4 @@ adsense-data-ad-slot: "8307698848"
 # Lazy Images ("enabled" or "disabled")
 lazyimages: "enabled"
 
-exclude: [changelog.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock]
+exclude: [todo.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock]

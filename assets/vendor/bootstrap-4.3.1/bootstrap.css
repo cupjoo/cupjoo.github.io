@@ -185,12 +185,12 @@ code,
 kbd,
 samp {
   font-family: 'NanumSquare';
-  font-size: 1em;
+  font-size: 1.1rem;
 }
 
 pre {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
   overflow: auto;
 }
 
@@ -508,7 +508,6 @@ mark,
 }
 
 code {
-  font-size: 87.5%;
   color: #e83e8c;
   word-break: break-word;
 }

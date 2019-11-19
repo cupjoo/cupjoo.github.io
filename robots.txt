@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://cupjoo.github.io/sitemap.xml

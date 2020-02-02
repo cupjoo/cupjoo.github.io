@@ -25,14 +25,24 @@ post_class: post-template
                 {% if page.author %}
                 <div class="row post-top-meta">
                     <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
-                        {% if author.avatar %}
-                        <img class="author-thumb" src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
-                        {% else %}
-                        <img class="author-thumb" src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x" alt="{{ author.display_name }}">
-                        {% endif %}
+                        <a href="{{site.baseurl}}/about">
+                            {% if author.avatar %}
+                            <img class="author-thumb" 
+                                src="{{site.baseurl}}/{{ author.avatar }}" 
+                                alt="{{ author.description }}" 
+                                style="color:#121416;">
+                            {% else %}
+                            <img class="author-thumb" 
+                                src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x" 
+                                alt="{{ author.description }}" 
+                                style="color:#121416;">
+                            {% endif %}
+                        </a>
                     </div>
                     <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left" style="padding-left: 0;">
-                        <span class="author-name">{{ author.description }}</span>
+                        <span class="author-name" style="color:#121416;">
+                            <a href="{{site.baseurl}}/about">{{ author.description }}</a>
+                        </span>
                         <a target="_blank" href="{{ author.github }}" class="btn follow">Follow</a>
                     </div>
                 </div>

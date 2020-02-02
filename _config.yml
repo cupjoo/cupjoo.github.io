@@ -7,7 +7,7 @@ logo: 'assets/images/logo.png'
 favicon: 'assets/images/logo.png'
 baseurl: /
 google_analytics: 'UA-121057592-1'
-disqus: 'demowebsite'
+disqus: 'cupjoo-github-io'
 mailchimp-list: 'https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b'
 include: ["_pages"]
 permalink: /:title/
@@ -16,12 +16,12 @@ permalink: /:title/
 authors:
   cupjoo:
     name: 최준영
-    display_name: 최준영
+    display_name: 쌍문동 척척박사
     gravatar: e56154546cf4be74e393c62d1ae9f9d4
     email: cupjoo@gmail.com
     avatar: 'assets/images/avatar.jpg'
     github: https://github.com/cupjoo
-    description: "쌍문동 척척박사"
+    description: "Spring / ReactJS / Competitive Programming"
 
 # Plugins
 plugins:

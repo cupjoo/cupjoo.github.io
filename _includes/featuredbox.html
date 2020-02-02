@@ -33,12 +33,25 @@
                         </div>
                         <div class="card-footer b-0 bg-white mt-auto">
                             <div class="wrapfooter">
-                                {% if post.author %}
+                                {% if post.author %}                                
                                 <span class="meta-footer-thumb">
-                                <img class="author-thumb" src="{{ site.baseurl }}/{{ author.avatar }}" alt="{{ author.display_name }}">
+                                    <a href="{{site.baseurl}}/about">
+                                        {% if author.avatar %}
+                                        <img class="author-thumb"
+                                            src="{{ site.baseurl }}/{{ author.avatar }}"
+                                            alt="{{ author.display_name }}">
+                                        {% else %}
+                                        <img class="author-thumb"
+                                            src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x"
+                                            alt="{{ author.display_name }}">
+                                        {% endif %}
+                                    </a>
                                 </span>
                                 <span class="author-meta">
-                                <span class="post-name"><a target="_blank" href="{{ author.web }}">{{ author.display_name }}</a></span><br/>
+                                    <span class="post-name">
+                                        <a href="{{site.baseurl}}/about" style="color:#121416;">{{ author.display_name }}</a>
+                                    </span>
+                                    <br/>
                                 {% endif %}
                                 <span class="post-date">{{ post.date | date_to_string }}</span>
                                 </span>

@@ -29,21 +29,20 @@ post_class: post-template
                             {% if author.avatar %}
                             <img class="author-thumb" 
                                 src="{{site.baseurl}}/{{ author.avatar }}" 
-                                alt="{{ author.description }}" 
-                                style="color:#121416;">
+                                alt="{{ author.display_name }}">
                             {% else %}
                             <img class="author-thumb" 
                                 src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x" 
-                                alt="{{ author.description }}" 
-                                style="color:#121416;">
+                                alt="{{ author.display_name }}">
                             {% endif %}
                         </a>
                     </div>
                     <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left" style="padding-left: 0;">
-                        <span class="author-name" style="color:#121416;">
-                            <a href="{{site.baseurl}}/about">{{ author.description }}</a>
+                        <span class="author-name">
+                            <a href="{{site.baseurl}}/about" style="color:#121416;">{{ author.display_name }}</a>
                         </span>
                         <a target="_blank" href="{{ author.github }}" class="btn follow">Follow</a>
+                        <span class="author-description">{{ author.description }}</span>
                     </div>
                 </div>
                 {% endif %}

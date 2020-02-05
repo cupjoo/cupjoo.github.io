@@ -4231,6 +4231,7 @@ input[type="button"].btn-block {
 
 .navbar-toggler:hover, .navbar-toggler:focus {
   text-decoration: none;
+  outline: none;
 }
 
 .navbar-toggler-icon {
@@ -4484,7 +4485,7 @@ input[type="button"].btn-block {
 
 .navbar-light .navbar-toggler {
   color: rgba(0, 0, 0, 0.5);
-  border-color: rgba(0, 0, 0, 0.1);
+  /* border-color: rgba(0, 0, 0, 0.1); */
 }
 
 .navbar-light .navbar-toggler-icon {

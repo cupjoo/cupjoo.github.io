@@ -12,7 +12,6 @@ License: https://www.wowthemes.net/freebies-license/
 }
 
 .author-name {
-    margin-left: -1rem;
     color: #212529 !important;
     font-weight: 400;
 }
@@ -216,6 +215,10 @@ section.recent-posts {
     font-size: 0.9rem;
     color: rgba(0, 0, 0, .44);
     display: inline-block;
+}
+
+.post-top-meta div {
+    color: rgba(0, 0, 0, .44);
 }
 
 .post-top-meta .author-description {

@@ -6,7 +6,6 @@ description: "쌍문동 척척박사의 오지는 컴퓨터 공부"
 logo: 'assets/images/logo.png'
 favicon: 'assets/images/logo.png'
 baseurl: /
-google_analytics: 'UA-121057592-1'
 disqus: 'cupjoo-github-io'
 mailchimp-list: 'https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b'
 include: ["_pages"]
@@ -21,7 +20,7 @@ authors:
     email: cupjoo@gmail.com
     avatar: 'assets/images/avatar.jpg'
     github: https://github.com/cupjoo
-    description: "Spring / ReactJS / Competitive Programming"
+    description: "Spring / ReactJS / PS"
 
 # Plugins
 plugins:
@@ -52,6 +51,9 @@ kramdown:
   syntax_highlighter_opts:
     block:
       line_numbers: true
+
+# Analytics
+google_analytics: 'UA-121057592-2'
 
 # Adsense (change to "enabled" to activate, also your client id and ad slot. Create a new ad unit from your Adsense account to get the slot.)
 adsense: "disabled"

@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "C++ STL 종합 정리"
+title: "Java Collections in 알고리즘"
 author: cupjoo
-categories: [알고리즘, C++]
+categories: [알고리즘, Java]
 image: assets/images/2020-02-03/1.png
 ---
 
@@ -10,7 +10,7 @@ image: assets/images/2020-02-03/1.png
 
 ---
 
-이번 포스팅은 설명보다는 사용법 위주로 작성하여 Cheetsheet의 용도로 활용할 예정이다. 꼭 필요한 STL만 정리했다.
+이번 포스팅은 설명보다는 사용법 위주로 작성하여 Cheetsheet의 용도로 활용할 예정이다. 꼭 필요한 Collection만 정리했다.
 
 ## vector
 
@@ -38,4 +38,3 @@ image: assets/images/2020-02-03/1.png
 - reverse
 - next_permutation
 
-## bits/stdc++.h

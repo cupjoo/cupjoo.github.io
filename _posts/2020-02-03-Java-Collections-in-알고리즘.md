@@ -289,6 +289,7 @@ class StringTest {
 | Stack | O(1) | O(1) | O(1) |  |
 | ArrayDeque | O(1) | O(1) | O(1) |  |
 | PriorityQueue | O() | O() | O() | O() |
+{: .custom-table }
 
 ## 출처
 

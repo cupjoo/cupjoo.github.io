@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Trie"
+title: "Fenwick Tree"
 author: cupjoo
 categories: [알고리즘]
-image: assets/images/2020-01-29/1.png
+image: assets/images/2020-02-13/1.png
 hidden: true
 ---
 
@@ -13,9 +13,9 @@ hidden: true
 
 ## 기본 개념
 
-## 대회 기출
+Binary Index Tree
 
-[Google Code Jam 2019 Round 1A Alien Rhyme](https://codingcompetitions.withgoogle.com/codejam/round/0000000000051635/0000000000104e05)
+## 대회 기출
 
 ## 추가 문제
 

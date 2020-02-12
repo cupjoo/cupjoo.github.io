@@ -7,6 +7,7 @@ License: https://www.wowthemes.net/freebies-license/
     html { font-size:18px; } /* Increase the font size on higher resolutions */
     .container {max-width:80%;}
 }
+
 .mainheading {
     padding: 1rem 0rem;
 }
@@ -132,7 +133,7 @@ section.recent-posts {
 }
 
 .maxthumb {
-    max-height: 300px;
+    max-height: 400px;
     overflow: hidden;
 }
 

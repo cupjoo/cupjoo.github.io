@@ -42,4 +42,4 @@ at [ChungAng University, Seoul, South Korea](https://www.cau.ac.kr)
 
 - Java / Python / C++ / Typescript
 - Spring MVC / Spring Boot / Django
-- ReactJS / Redux
+- ReactJS / MobX

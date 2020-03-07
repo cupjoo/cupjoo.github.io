@@ -49,37 +49,26 @@ class ArrayListTest {
 
 ```java
 class ArrayListTest {
+    List<List<Integer>> graph;  // 2-D ArrayList
+
     public ArrayListTest() {
-        // Graph by 2-D ArrayList
         int[][] input = { {1, 3}, {2, 5}, {3, 4}, {4, 6} };
-        Graph graph = new Graph(6);
+
+        // adjacency list
+        graph = new ArrayList<>();
+        for(int i = 0; i <= input.length; i++){
+            graph.add(new ArrayList<>());
+        }
+
         for (int[] edge : input) {
             graph.add(edge[0], edge[1]);
+            graph.add(edge[1], edge[0]);
         }
 
         System.out.print("1 connect to ");
-        for (int node : graph.getNode(1)) {
+        for (int node : graph.get(1)) {
             System.out.print(node + " ");
         }
-    }
-}
-
-class Graph {
-    List<List<Integer>> graph;  // 2-D ArrayList
-
-    public Graph(int N){
-        // adjacency list
-        graph = new ArrayList<>();
-        for(int i = 0; i <= N; i++){
-            graph.add(new ArrayList<>());
-        }
-    }
-    public void add(int x, int y){
-        graph.get(x).add(y);
-        graph.get(y).add(x);
-    }
-    public List<Integer> getNode(int x){
-        return this.graph.get(x);
     }
 }
 ```
@@ -89,6 +78,107 @@ class Graph {
 - `Graph`를 표현할 때 사용한다.
 - 배열의 sort가 필요할 때 사용한다.
 - 그 외에는 무조건 다른 자료구조를 사용한다.
+
+## Stack
+
+스택은 FIFO를 위한 자료구조다. 설명이 필요 없을 것 같다.
+
+```java
+class StackTest {
+    public StackTest(){
+        int top = -1;
+        Stack<Integer> st = new Stack<>();
+
+        for(int i = 0; i < 5; i++){
+            st.push(i);         // O(1)
+        }
+        if(!st.empty()){
+            top = st.pop();     // O(1), remove and returns value
+        }
+        System.out.println(top);
+    }
+}
+```
+
+관련 문제
+
+- [히스토그램](https://www.acmicpc.net/problem/1725)
+- [탑](https://www.acmicpc.net/problem/2493)
+
+## Queue
+
+큐는 FILO를 위한 자료구조다. 스택과 달리 Interface로 구현되어 있으며, LinkedList와 ArrayDeque를 사용해 표현한다. 성능 면에서 더 나은 ArrayDeque를 사용하자.
+
+```java
+class QueueTest {
+    public QueueTest(){
+        int front = -1;
+        Queue<Integer> q = new ArrayDeque<>();
+
+        for(int i = 0; i < 5; i++){
+            q.offer(i);         // O(1)
+        }
+        if(!q.isEmpty()){
+            front = q.poll();   // O(1), remove and return value
+        }
+        System.out.println(front);
+    }
+}
+```
+
+참고로 큐는 큐 자체만의 문제보다 BFS를 구현하기 위한 도구로 쓰일 때가 더 많다.
+
+## PriorityQueue
+
+간단히 설명하자면 PriorityQueue는 들어온 순서에 상관 없이 우선순위가 높은 데이터가 먼저 반환되는 자료형이다. 기초 자료형에 대한 우선순위 큐는 기본적으로 그 값이 작은 데이터부터 반환한다. 하지만 사용자 클래스에 대한 우선순위 큐를 생성하는 경우 Comparable Interface를 implement하여 우선순위를 직접 정해줘야 한다.
+
+```java
+class Prisoner implements Comparable<Prisoner>{
+    String name;
+    int weight;
+
+    public Prisoner(String name, int weight){
+        this.name = name;
+        this.weight = weight;
+    }
+    @Override
+    public int compareTo(Prisoner o) {
+        return this.weight >= o.weight ? 1 : -1;
+    }
+}
+
+class PriorityQueueTest {
+    public PriorityQueueTest(){
+        PriorityQueue<Prisoner> pq = new PriorityQueue<>();
+        pq.offer(new Prisoner("junyoung", 5));
+        pq.offer(new Prisoner("cupjoo", 15));
+        pq.offer(new Prisoner("Pacquiao", 10));
+
+        if(!pq.isEmpty()){
+            Prisoner p = pq.poll();
+            System.out.println(p.name);
+        }
+
+        PriorityQueue<String> pqs = new PriorityQueue<>();
+        pqs.offer("aaa");
+        pqs.offer("bbb");
+        pqs.offer("ccc");
+
+        if(!pqs.isEmpty()){
+            String s = pqs.poll();
+            System.out.println(s);
+        }
+    }
+}
+```
+
+**정리**
+
+- 업데이트 예정
+
+관련 문제
+
+- 업데이트 예정
 
 ## Set
 
@@ -159,63 +249,6 @@ class HashMapTest {
 - `키의 유무와 그 값으로 연산`이 필요할 때 사용한다. 그 외 용도로는 사용하지 말자.
 - `HashMap`을 사용하자.
 
-## Stack
-
-스택은 FIFO를 위한 자료구조다. 설명이 필요 없을 것 같다.
-
-```java
-class StackTest {
-    public StackTest(){
-        int top = -1;
-        Stack<Integer> st = new Stack<>();
-
-        for(int i = 0; i < 5; i++){
-            st.push(i);         // O(1)
-        }
-        if(!st.empty()){
-            top = st.pop();     // O(1), remove and returns value
-        }
-        System.out.println(top);
-    }
-}
-```
-
-관련 문제
-
-- [히스토그램](https://www.acmicpc.net/problem/1725)
-- [탑](https://www.acmicpc.net/problem/2493)
-
-## Queue
-
-큐는 FILO를 위한 자료구조다. 스택과 달리 Interface로 구현되어 있으며, LinkedList와 ArrayDeque를 사용해 표현한다. 성능 면에서 더 나은 ArrayDeque를 사용하자.
-
-```java
-class QueueTest {
-    public QueueTest(){
-        int front = -1;
-        Queue<Integer> q = new ArrayDeque<>();
-
-        for(int i = 0; i < 5; i++){
-            q.offer(i);         // O(1)
-        }
-        if(!q.isEmpty()){
-            front = q.poll();   // O(1), remove and return value
-        }
-        System.out.println(front);
-    }
-}
-```
-
-참고로 큐는 큐 자체만의 문제보다 BFS를 구현하기 위한 도구로 쓰일 때가 더 많다.
-
-## PriorityQueue
-
-AbstractQueue Interface를 기반으로 한다.
-
-```java
-
-```
-
 ## Collections
 
 Collection 클래스의 공통 함수를 담고 있는 클래스이다.
@@ -224,60 +257,6 @@ Collection 클래스의 공통 함수를 담고 있는 클래스이다.
 - sort
 - reverse
 - next_permutation
-
-## String
-
-사실 String은 JCF (Java Collections Framework) 에 포함된 클래스가 아니지만 문자열 문제를 푸는데 필수 요소이기 때문에 내용에 추가했다.
-
-```java
-class StringTest {
-    public StringTest(){
-        String text = "My name is Junyoung";
-
-        System.out.println(text.equals("My name is Junyoung"));
-        System.out.println(text.indexOf("me"));  // O(n), else -1
-
-        // replace
-        text = text.replaceAll("Junyoung", "Charley");
-
-        // substring
-        text = text.substring(11) + ", " + text.substring(0, 11);
-        System.out.println(text);
-        // split
-        String[] tokens = text.split(" ");
-        for(String token : tokens){
-            System.out.println(token);
-        }
-
-        // concat
-        String sum = tokens[0]
-                .concat(tokens[1])
-                .concat(tokens[2]); // +
-        sum += tokens[3];           // by StringBuilder
-        System.out.println(sum);
-
-        // StringBuilder
-        StringBuilder builder = new StringBuilder();
-        for(String token : tokens){
-            builder.append(token);
-        }
-        System.out.println(builder.toString());
-
-        // compareTo
-        System.out.println("bbb".compareTo("bbb"));     // 0, equals
-        System.out.println("bbb".compareTo("b"));       // 2, length
-        System.out.println("bbb".compareTo("bbbbbb"));  // -3, length
-        System.out.println("bbb".compareTo("bbbccc"));  // -3, length
-        System.out.println("bbb".compareTo("cccccc"));  // -1, dictionary order
-        System.out.println("bbb".compareTo("ccc"));     // -1, dictionary order
-        System.out.println("bbb".compareTo("aaa"));     // 1, dictionary order
-    }
-}
-```
-
-**특징**
-
-- 이후 추가할 예정
 
 ## Time Complexity
 

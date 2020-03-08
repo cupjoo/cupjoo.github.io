@@ -370,7 +370,7 @@ class SortTest {
 - Java에는 C++에서 순열을 구하는데 사용하는 next_permutation이 없다. 하지만 별로 어려운 기법은 아니니 직접 구현해도 될 것 같다.
 - Arrays.asList를 사용해 array to list 변환 시 primitive type은 오류가 발생한다. [How to convert int array into Integer List in Java](https://stackoverflow.com/questions/1073919/how-to-convert-int-into-listinteger-in-java)를 참고하자.
 
-## 출처
+## 참고 사이트
 
 > 
 - [Java Collections – Performance (Time Complexity)](http://infotechgems.blogspot.com/2011/11/java-collections-performance-time.html?m=1)

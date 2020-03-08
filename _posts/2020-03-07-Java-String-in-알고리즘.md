@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "문자열 테크닉 in 알고리즘"
+title: "Java String in 알고리즘"
 author: cupjoo
 categories: [알고리즘]
 image: assets/images/2020-03-07/1.png
 hidden: true
 ---
 
-[대회기출로 정리하는 알고리즘 시리즈 로드맵](https://cupjoo.github.io/대회기출로-정리하는-알고리즘-시리즈-로드맵)
+[대회기출로 정리하는 알고리즘 로드맵](https://cupjoo.github.io/대회기출로-정리하는-알고리즘-로드맵)
 
 ---
 

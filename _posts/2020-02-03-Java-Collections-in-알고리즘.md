@@ -313,19 +313,19 @@ class SortTest {
 
 그럼 실제로 자바에서는 어떤 정렬을 사용하고 있을까? 내부 로직을 살펴보자.
 
-![2.gif]({{ site.baseurl }}/assets/images/2020-02-03/2.PNG)
+![2.png]({{ site.baseurl }}/assets/images/2020-02-03/2.png)
 
 먼저 Collections.sort부터 보면, Arrays.sort와 동일한 함수를 사용한다는 것으로 보인다.
 
-![3.gif]({{ site.baseurl }}/assets/images/2020-02-03/3.PNG)
+![3.png]({{ site.baseurl }}/assets/images/2020-02-03/3.png)
 
 최종적으로 보면 TimeSort와 MergeSort를 사용한다는 것을 알 수 있다. 해당 정렬 기법에 대한 내용은 이 포스팅의 범위를 넘어가기 때문에 [Tim sort에 대해 알아보자](https://d2.naver.com/helloworld/0315536)를 참고하자.
 
-![4.gif]({{ site.baseurl }}/assets/images/2020-02-03/4.PNG)
+![4.png]({{ site.baseurl }}/assets/images/2020-02-03/4.png)
 
 이번엔 Arrays.sort를 살펴봤는데, 오잉.. 이름만 같고 다른 함수가 호출되네? DualPivotQuicksort?
 
-![5.gif]({{ site.baseurl }}/assets/images/2020-02-03/5.PNG)
+![5.png]({{ site.baseurl }}/assets/images/2020-02-03/5.png)
 
 흠.. 찾아보니 pivot을 1개만 쓰는 기존의 QuickSort에서 발전된 pivot을 2개를 사용하는 QuickSort라고 한다. 마찬가지 이유로 자세한 내용은 [Dual-Pivot Quick Sort](https://defacto-standard.tistory.com/38)를 참고하자.
 

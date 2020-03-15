@@ -7,7 +7,7 @@
 
 <!-- include adsense-under-header.html -->
 
-<link rel="icon" href="{{ site.baseurl }}/assets/images/logo.png">
+<link rel="icon" href="{{ site.baseurl }}/favicon.ico">
 
 <title>{{site.name}}</title>
 
@@ -65,15 +65,27 @@ ga('send', 'pageview');
             <ul class="navbar-nav ml-auto">
 
                 {% if page.url == "/" %}
-                <li class="nav-item active">
+                <li class="nav-item active nav-active">
                 {% else %}
                 <li class="nav-item">
                 {% endif %}
                 <a class="nav-link" href="{{ site.baseurl }}/index.html">Home</a>
                 </li>
 
+                {% if page.url == "/about" %}
+                <li class="nav-item active nav-active">
+                {% else %}
                 <li class="nav-item">
+                {% endif %}
                 <a class="nav-link" href="{{ site.baseurl }}/about">About</a>
+                </li>
+                
+                {% if page.url == "/categories" %}
+                <li class="nav-item active nav-active">
+                {% else %}
+                <li class="nav-item">
+                {% endif %}
+                <a class="nav-link" href="{{ site.baseurl }}/#explorer">Category</a>
                 </li>
 
                 <li class="nav-item">
@@ -84,17 +96,6 @@ ga('send', 'pageview');
                         title="Baekjoon"
                         >
                             <i class="fas fa-code"></i>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a target="_blank"
-                        class="nav-link"
-                        href="https://cupjoo.tistory.com"
-                        data-toggle="tooltip" data-placement="bottom"
-                        title="Tistory"
-                        >
-                            <i class="fas fa-blog"></i>
                     </a>
                 </li>
 
@@ -160,21 +161,21 @@ ga('send', 'pageview');
 	<div class="d-md-flex h-100">
 		<div class="col-md-4 transpdark align-self-center text-center h-100">
             <div class="d-md-flex align-items-center justify-content-center h-100">
-                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+                <h2 id="explorer" class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
             </div>
 		</div>
 		<div class="col-md-8 p-5 align-self-center text-center">
             {% assign categories_list = site.categories %}
             {% if categories_list.first[0] == null %}
                 {% for category in categories_list %}
-                    <a class="mt-1 mb-1" href="{{site.baseurl}}/categories#{{ category | url_escape | strip | replace: ' ', '-' }}">
-                        {{ category | camelcase }} ({{ site.tags[category].size }})
+                    <a class="mt-1 mb-1" href="{{site.baseurl}}/categories#{{ category | url_escape | strip | replace: ' ', '' | replace: '.', '' }}">
+                        {{ category | capitalize }} ({{ site.tags[category].size }})
                     </a>
                 {% endfor %}
             {% else %}
                 {% for category in categories_list %}
-                    <a class="mt-1 mb-1" href="{{site.baseurl}}/categories#{{ category[0] | url_escape | strip | replace: ' ', '-' }}">
-                        {{ category[0] | camelcase }} ({{ category[1].size }})
+                    <a class="mt-1 mb-1" href="{{site.baseurl}}/categories#{{ category[0] | url_escape | strip | replace: ' ', '' | replace: '.', '' }}">
+                        {{ category[0] | capitalize }} ({{ category[1].size }})
                     </a>
                 {% endfor %}
             {% endif %}

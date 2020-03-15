@@ -8,6 +8,14 @@ License: https://www.wowthemes.net/freebies-license/
     .container {max-width:80%;}
 }
 
+.nav-active{
+    border-bottom: #00ab6b 2px solid;
+}
+
+.nav-item:hover{
+    border-bottom: #00ab6b 2px solid;
+}
+
 .custom-table{
     border-collapse: collapse;
     border-spacing: 0;
@@ -348,6 +356,7 @@ span.post-read-more a:hover {
 
 .mainheading h1.sitetitle {
     font-family: 'NanumSquare';
+    font-weight: 400;
 }
 
 .mainheading h1.posttitle {
@@ -843,7 +852,6 @@ iframe {
     border-radius: 30px;
     color: #fff;
     font-weight: 500;
-    text-transform: lowercase;
     font-size: 1.05rem;
     display: inline-block;
 }

@@ -372,6 +372,6 @@ class SortTest {
 
 ## 참고 사이트
 
-> 
-- [Java Collections – Performance (Time Complexity)](http://infotechgems.blogspot.com/2011/11/java-collections-performance-time.html?m=1)
-- [LinkedList vs. ArrayDeque](http://javaqueue2010.blogspot.com/)
+> [Java Collections – Performance (Time Complexity)](http://infotechgems.blogspot.com/2011/11/java-collections-performance-time.html?m=1)
+
+> [LinkedList vs. ArrayDeque](http://javaqueue2010.blogspot.com/)

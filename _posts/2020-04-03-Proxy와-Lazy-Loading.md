@@ -4,7 +4,6 @@ title: "Proxy와 Lazy Loading"
 author: cupjoo
 categories: [JPA]
 image: assets/images/2020-04-03/1.png
-hidden: true
 ---
 
 ## Proxy

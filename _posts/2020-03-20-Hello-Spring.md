@@ -4,7 +4,6 @@ title: "Hello, Spring!"
 author: cupjoo
 categories: [Spring]
 image: assets/images/2020-03-20/1.png
-hidden: true
 ---
 
 이 포스트에서는 Spring 입문자를 대상으로 Spring 기초 개념과 용어, Spring에 속하지는 않지만 자주 사용되는 라이브러리 등에 대해 설명한다. 여러 주제를 병렬적으로 정리하다 보니 다소 두서가 없을 수 있으니 필요한 내용만 선택해 보자. 예시 프로젝트 기본 세팅은 다음 환경으로 구성된다.
@@ -26,10 +25,25 @@ hidden: true
 
 ![2.png]({{ site.baseurl }}/assets/images/2020-03-20/2.png)
 
-[프로젝트 코드](https://github.com/cupjoo/) @@
+[프로젝트 코드](https://gist.github.com/cupjoo/4d17f6d7547d09e7af8e1dd392259579)
 
 스프링 부트의 기본 구조는 크게 Web / Service / Repository Layer로 나뉜다.
-설명 추가! @@
+
+- **Web Layer**
+  - controllers / exception handelers / filters / view templates, ...
+  - 외부 요청과 응답에 대한 영역
+- **Service Layer**
+  - application services / infrastructure services
+  - 트랜잭션, 도메인 기능 간 순서를 보장하는 서비스 영역
+- **Repository Layer**
+  - repository interfaces and their implementations
+  - DB 접근 영역 (DAO)
+- **DTOs**
+  - 계층 간 데이터 교환을 위한 객체
+- **Domain Model**
+  - domain services / entities / value objects
+  - 비지니스 처리를 담당하는 곳
+
 스프링 부트는 메인 클래스에 있는 **@SpringBootApplication** 어노테이션의 위치를 시작으로 모든 설정값을 읽기 때문에 해당 어노테이션은 항상 프로젝트 최상단에 위치해야 한다.
 
 Spring Boot는 어플리케이션 실행 시 내장 **WAS (Wep Application Server)** 를 실행한다. 따라서 Tomcat과 같은 외부 WAS 없이도 생성된 Jar 파일만 실행하면 항상 같은 환경의 어플리케이션을 배포할 수 있다.
@@ -122,7 +136,7 @@ dependencies {
 - 재시작 시 플러그인이 적용됨
 - 프로젝트 우측 하단 **Lombok Annotation Processing** 설정 활성화
 
-![6.png]({{ site.baseurl }}/assets/images/2020-03-20/6.png)
+![7.png]({{ site.baseurl }}/assets/images/2020-03-20/7.png)
 
 ### 자주 사용하는 롬복 어노테이션
 
@@ -135,11 +149,37 @@ dependencies {
 
 ### 주의 1
 
-절대 Setter를 무분별하게 사용하면 안된다. 값 변동이 필요한 경우에만 의미를 알 수 있는 이름의 메소드를 따로 생성하자.
+절대 Setter를 무분별하게 사용하면 안된다. 값 변동이 필요한 경우에만 목적과 의미가 분명한 이름의 메소드를 따로 생성하자.
 
 ```java
 public void changePrice(int price){
-    this.price = price;
+  if(price < 0){
+    System.out.println("올바른 범위의 가격이 아닙니다.");
+    return;
+  }
+  this.price = price;
+}
+```
+
+Builder 또한 마찬가지로, 필요한 값만 초기화하고 나머지 값은 DB로부터 생성된 값을 받아오던가 setter를 사용하자.
+
+```java
+// ... @Builder 선언 X
+public class Posts {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  private String title;
+  private String content;
+  private String author;
+
+  @Builder  // 필요한 값만 받아오도록 재정의
+  public Posts(String title, String content, String author) {
+      this.title = title;
+      this.content = content;
+      this.author = author;
+  }
 }
 ```
 
@@ -154,6 +194,36 @@ public class Member {
     private Owner owner;
 }
 ```
+
+## 4. JPA
+
+초기 Spring에서는 데이터 처리에 순수 JDBC를 사용해 쿼리문을 직접 작성해야 했다. 이후 중복되는 코드를 줄이고자 iBatis, MyBatis, JdbcTemplate과 같은 `SQL Mapper`가 등장하지만, 여전히 문제점들이 존재했다.
+
+- Connection, ORM 등은 자동화됐지만 여전히 반복되는 SQL 코드를 작성하는 SQL 의존적인 개발
+- 패러다임의 불일치 (RDB vs 객체지향)
+  - 객체지향 : `추상화, 캡슐화, 정보은닉, 상속, 다형성` 등 다양한 기법으로 데이터를 관리함
+  - RDB : `테이블` 기반의 데이터 관리
+- 진정한 의미의 계층 분할이 어려워짐
+  - ex) DAO가 동일한 객체를 두 번 불러오더라도 같은 객체인지 보장되지가 않음
+- 객체답게 모델링할수록 매핑 작업이 늘어남
+
+이를 극복하고자 Java 진영에서는 **자바 표준 ORM 인터페이스**인 `JPA (Java Persistence API)`를 만들었다. JPA는 Java (JDBC)와 DB (SQL) 사이에서 패러다임을 일치시켜주는 기술로, 객체를 쿼리가 아닌 엔티티로 관리해 특정 DB에 종속되지 않고 **SQL에 종속적인 개발**로부터 벗어나게 한다.
+
+![8.png]({{ site.baseurl }}/assets/images/2020-03-20/8.png)
+
+> 참고 사이트 : [JPA, Hibernate, 그리고 Spring Data JPA의 차이점](https://suhwan.dev/2019/02/24/jpa-vs-hibernate-vs-spring-data-jpa/)
+
+**인터페이스 (기술 명세)**인 JPA는 `Hibernate`와 같은 구현체 형태로 기능을 수행한다. 물론 실무에서는 Hibernate보다 더 간편한 `Spring Data JPA` 모듈을 사용하지만, JPA의 기본 원리에 대한 이해는 베이스로 깔려 있어야 한다.
+
+> 관련 포스트 : [영속성 컨텍스트](https://cupjoo.github.io/영속성-컨텍스트)
+
+Spring 팀에서는 Hiberante가 있음에도 몇 가지 이유로 Spring Data JPA를 사용할 것을 권장하고 있다.
+
+- Hibernate를 대체하는 새로운 구현체 등장 시 교체가 쉽다.
+- RDB 외에 다른 저장소로 교체가 쉽다.
+- Spring Data의 하위 프로젝트는 모두 같은 인터페이스를 갖는다.
+- ex) Spring Data JPA, Spring Data MongoDB, Spring Data Redis
+- 따라서 저장소를 변경해도 기존 메소드들을 그대로 사용 가능하다.
 
 ## 5. H2 Database
 

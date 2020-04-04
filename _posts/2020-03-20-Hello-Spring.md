@@ -4,6 +4,8 @@ title: "Hello, Spring!"
 author: cupjoo
 categories: [Spring]
 image: assets/images/2020-03-20/1.png
+featured: true
+hidden: true
 ---
 
 이 포스트에서는 Spring 입문자를 대상으로 Spring 기초 개념과 용어, Spring에 속하지는 않지만 자주 사용되는 라이브러리 등에 대해 설명한다. 여러 주제를 병렬적으로 정리하다 보니 다소 두서가 없을 수 있으니 필요한 내용만 선택해 보자. 예시 프로젝트 기본 세팅은 다음 환경으로 구성된다.

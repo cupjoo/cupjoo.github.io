@@ -91,6 +91,8 @@ System.out.println(team.getName());
 - **@ManyTo**, **@OneToOne** : 즉시 로딩이 기본값 -> LAZY로 설정하자
 - **@OneToMany**, **@ManyToMany** : 지연 로딩이 기본값
 
+> 관련 포스트 : [N+1 문제와 Fetch Join](https://cupjoo.github.io/N-1-문제와-Fetch-Join)
+
 ## 참고 자료
 
 > [자바 ORM 표준 JPA 프로그래밍](https://www.inflearn.com/course/ORM-JPA-Basic)

@@ -134,4 +134,4 @@ where t.name = 'Team A'
 
 ## 참고 자료
 
-> [자바 ORM 표준 JPA 프로그래밍](https://www.inflearn.com/course/ORM-JPA-Basic)
+> [자바 ORM 표준 JPA 프로그래밍](https://book.naver.com/bookdb/book_detail.nhn?bid=9252528)

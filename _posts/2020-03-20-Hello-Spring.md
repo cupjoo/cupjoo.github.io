@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "Hello, Spring!"
 author: cupjoo
@@ -50,7 +50,11 @@ hidden: true
 
 Spring Boot는 어플리케이션 실행 시 내장 **WAS (Wep Application Server)** 를 실행한다. 따라서 Tomcat과 같은 외부 WAS 없이도 생성된 Jar 파일만 실행하면 항상 같은 환경의 어플리케이션을 배포할 수 있다.
 
-> 관련 포스트 : [Spring의 핵심 기술](https://cupjoo.github.io/Spring의-핵심-기술)
+> 관련 포스트 : [IoC : 오브젝트와 의존관계](https://cupjoo.github.io/IoC-오브젝트와-의존관계)
+
+> 관련 포스트 : [AOP](https://cupjoo.github.io/)
+
+> 관련 포스트 : [PSA](https://cupjoo.github.io/)
 
 ## 2. Gradle
 
@@ -182,6 +186,17 @@ public class Posts {
       this.content = content;
       this.author = author;
   }
+}
+```
+
+요즘 스프링 DI 트렌드는 @Autowired 보다 **final 제어자**와 **@RequiredArgsConstructor** 조합으로 구현하는 것을 선호한다.
+
+```java
+@Service
+@RequiredArgsConstructor
+public class MemberService {
+    // ...
+    private final MemberRepository memberRepository;
 }
 ```
 

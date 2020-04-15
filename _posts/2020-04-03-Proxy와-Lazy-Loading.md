@@ -88,7 +88,7 @@ System.out.println(team.getName());
 - fetch 전략을 EAGER로 설정하면 즉시 로딩이 적용된다. 하지만 절대로 즉시 로딩은 사용하지 말자.
   - 예상치 못한 문제를 일으킬 수 있음
   - JPQL은 일단 SQL문을 생성하면 바로 실행하기에 **N+1** 문제를 발생시킴
-- **@ManyTo**, **@OneToOne** : 즉시 로딩이 기본값 -> LAZY로 설정하자
+- **@ManyToOne**, **@OneToOne** : 즉시 로딩이 기본값 -> LAZY로 설정하자
 - **@OneToMany**, **@ManyToMany** : 지연 로딩이 기본값
 
 > 관련 포스트 : [N+1 문제와 Fetch Join](https://cupjoo.github.io/N-1-문제와-Fetch-Join)

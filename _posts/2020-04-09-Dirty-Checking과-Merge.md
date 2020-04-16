@@ -72,7 +72,7 @@ public class ItemRepository {
 
 전자는 Controller로부터 생성된 Item 객체를 사용해 실제 Item 객체를 조회해온다. 그 뒤 가져온 item의 값을 변경해 변경 감지가 발생하게 한다.
 
-후자는 바로 save를 시키고, repository에서 이미 존재하는 아이템인 경우 merge한다. merge의 내부 로직은 전자와 동일하게 해당 item을 가져온 뒤 변경 감지를 통해 값을 변경한다. 단, 모든 속성 값을 변경하기 때문에, 만약 item 속성 중 null 값이 있는 경우에도 그대로 반영이 되어 데이터 손실이 발생할 수 있다.
+후자는 바로 save를 시키고, repository에서 이미 존재하는 아이템인 경우 merge한다. merge의 내부 로직은 전자와 동일하게 쿼리를 통해 해당 item을 가져온 뒤 변경 감지를 통해 값을 변경하는 비효율적인 로직으로 돌아간다. 단, 모든 속성 값을 변경하기 때문에, 만약 item 속성 중 null 값이 있는 경우에도 그대로 반영이 되어 데이터 손실이 발생할 수 있다.
 
 따라서 전자인 Dirty Checking이 더 선호되는 방식이다. 하지만 더 좋은 방식은 변경할 데이터만을 정확히 명시해 전달하는 것이다. 그러면 더 안전하게 변경 감지를 사용할 수 있게 된다.
 
@@ -87,6 +87,35 @@ public void updatePrice(Long itemId, int price){
 - Controller 계층에서 굳이 엔티티를 새롭게 생성하지 않는다.
 - Service 계층에 식별자 (id)와 변경할 데이터만을 명확하게 전달한다.
 - Service 계층에서 영속성 엔티티를 조회한 뒤, 데이터를 직접 변경한다.
+
+### 참고
+
+Spring Data JPA의 save() 메소드를 보면 Repository는 기본적으로 merge 방식을 채택해 구현되어 있다. (**SimpleJpaRepository**)
+
+![2.png]({{ site.baseurl }}/assets/images/2020-04-09/2.png)
+
+예외처리를 통해 최대한 Dirty Checking을 사용해야 하는게 원칙이지만, 어쩔 수 없이 save가 호출되는 경우에 merge 메소드를 피하기 위해 isNew 메소드를 오버라이드하자.
+
+```java
+public class Item implements Persistable<Long> {
+
+    @Id
+    private Long id;
+
+    @CreatedDate
+    private LocalDateTime createdDate;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public boolean isNew() {
+        return createdDate == null;
+    }
+}
+```
 
 ## 참고 자료
 

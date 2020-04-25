@@ -83,12 +83,15 @@ for (User user : users){
 
 ![2.png]({{ site.baseurl }}/assets/images/2020-04-07/2.png)
 
-## Fetch Join과 Distinct
+## 4. Collection에서의 Fetch Join
 
-정확히는 N+1 문제와는 관련 없지만 Collection Fetch Join과 관련해 자주 발생하는 문제이기에 다뤄보겠다. 다음 쿼리를 실행해보자.
+Collection에 대해서도 Fetch Join이 가능하다. 다음 쿼리를 실행해보자.
 
 ```java
-List<Team> teams = em.createQuery("select t from Team t join fetch t.members where t.name = 'Team A'", Team.class)
+List<Team> teams = em.createQuery(
+    "select t from Team t" +
+    " join fetch t.members" +
+    " where t.name = 'Team A'", Team.class)
     .getResultList();
 
 for(Team team : teams){
@@ -107,7 +110,7 @@ for(Team team : teams){
 
 ![5.png]({{ site.baseurl }}/assets/images/2020-04-07/5.png)
 
-하지만 JPA에는 엔티티 Collection이라는 개념을 추가해 엔티티 내부에 1:N 관계의 리스트를 저장한다. 그러다보니 조인 결과로 SQL에서는 `같은 pk를 같는 여러 개의 팀 A를 반환`하고, JPA에서는 각각 같은 객체임을 알지만 어쩔수 없이 그대로 리스트로 받게 되는 것이다.
+하지만 JPA에는 엔티티 Collection이라는 개념을 추가해 엔티티 내부에 1:N 관계의 리스트를 저장한다. 그러다보니 조인 결과로 SQL에서는 `같은 pk를 같는 여러 개의 팀 A를 반환`하고, JPA에서는 각각 같은 객체임을 알지만 어쩔수 없이 그대로 리스트로 받게 되는 것이다. 따라서 `데이터 중복`이 발생하게 된다.
 
 ![6.png]({{ site.baseurl }}/assets/images/2020-04-07/6.png)
 
@@ -131,6 +134,10 @@ where t.name = 'Team A'
 ![7.png]({{ site.baseurl }}/assets/images/2020-04-07/7.png)
 
 ![8.png]({{ site.baseurl }}/assets/images/2020-04-07/8.png)
+
+하지만 만약 **2개 이상의 컬렉션과 연관관계**를 맺는 경우에는 DISTINCT 키워드도 완벽하게 데이터 중복을 제어할 수 없다. 또한 스프링 부트와 함께 사용 시 **페이징 처리**를 해야하는데, DB 단에서부터 완벽하게 페이징을 처리해올 수가 없다. (반대로 ..ToOne 관계의 경우 row 수에 영향을 미치지 않기 때문에 페이징이 가능하다.) 이 경우의 해결책은 다음 포스트를 참고하자.
+
+> 관련 포스트 : [JPA Query 최적화](https://cupjoo.github.io/JPA-Query-최적화)
 
 ## 참고 자료
 

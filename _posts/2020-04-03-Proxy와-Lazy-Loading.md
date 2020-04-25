@@ -93,6 +93,8 @@ System.out.println(team.getName());
 
 > 관련 포스트 : [N+1 문제와 Fetch Join](https://cupjoo.github.io/N-1-문제와-Fetch-Join)
 
+> 관련 포스트 : [JPA Query 최적화](https://cupjoo.github.io/JPA-Query-최적화)
+
 ## 참고 자료
 
 > [자바 ORM 표준 JPA 프로그래밍](https://book.naver.com/bookdb/book_detail.nhn?bid=9252528)

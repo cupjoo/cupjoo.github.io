@@ -41,5 +41,5 @@ at [ChungAng University, Seoul, South Korea](https://www.cau.ac.kr)
 ## Skills
 
 - Java / Python / C++ / Typescript
-- Spring MVC / Spring Boot / Django
-- ReactJS / MobX
+- Spring Boot / Spring Data JPA / Django
+- ReactJS / Redux

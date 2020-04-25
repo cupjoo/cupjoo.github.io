@@ -16,7 +16,7 @@ Spring Boot와 Spring Data JPA, QueryDSL 환경에서 프로젝트를 구축할 
 ### 1) Prerequisites
 
 - [Java 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-- Gradle 4
+- Gradle 5 ([IntelliJ Gradle Version Change](https://tube-life.tistory.com/25))
 - Spring Boot 2.2.6
 - jUnit 5 (jupyter : Spring Boot 2.2 이상)
 - [H2 Database 1.4.200](https://www.h2database.com/html/main.html)
@@ -33,6 +33,7 @@ Spring Boot와 Spring Data JPA, QueryDSL 환경에서 프로젝트를 구축할 
 plugins {
     id 'org.springframework.boot' version '2.2.6.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
 }
 
@@ -41,6 +42,10 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -48,24 +53,46 @@ configurations {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-devtools'
+
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.querydsl:querydsl-apt'
+
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.1'
 
     compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
-    compile 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.1'
 }
 
 test {
     useJUnitPlatform()
+}
+
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
 }
 ```
 
@@ -95,22 +122,25 @@ logging.level:
   org.hibernate.SQL: debug  # Log
 ```
 
+- QueryDSL 빌드
+
+![6.png]({{ site.baseurl }}/assets/images/2020-04-15/6.png)
+
 ## 2. Spring Boot 프로젝트 구성
 
 ```yml
 spring:
   #datasource:
-    #url: jdbc:h2:tcp://localhost/~/jpashop
+    #url: jdbc:h2:tcp://localhost/~/datajpa
     #username: sa
     #password:
     #driver-class-name: org.h2.Driver
-
   jpa:
-    #hibernate:
-      #ddl-auto: create  # DDL
-      format_sql: true
+    hibernate:
+      ddl-auto: create
     properties:
       hibernate:
+        format_sql: true
         default_batch_fetch_size: 1000
 
 logging.level:
@@ -205,14 +235,14 @@ public class Address {
 - **@~~ToOne** : Lazy Loading 설정하기
 - `단방향 매핑`을 기본으로 하고, 필요한 경우에 `양방향 매핑`을 추가한다.
   - 연관관계 주인에서 `양방향으로` 외래키를 관리해야 한다.
-  - 연관관계와 별개로 영속성 전이는 필요한 경우에만 추가한다. (cascade)
+  - `양방향 연관관계`에서 영속성 전이는 필수가 아니지만 필요한 경우에는 추가한다. (cascade)
 
 ```java
 // Student
 @ToString(exclude = "major")
 public class Student extends BaseUser {
     // 단방향 매핑
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY, cascade = ALL) // 영속성 전이
     @JoinColumn(name = "department_id")
     private Department major;
 
@@ -269,7 +299,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 //@RunWith(SpringRunner.class)  // no more needs
@@ -295,7 +325,7 @@ class StudentRepositoryTest {
         Optional<Student> findStudent = studentRepository.findById(id);
 
         // then
-        assertEquals(findStudent.get().getName(), student.getName());
+        assertThat(findStudent.get().getName()).isEqaulTo(student.getName());
     }
 }
 ```
@@ -359,7 +389,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -378,9 +408,9 @@ class StudentServiceTest {
         studentService.join(student1);
 
         // then
-        assertThrows(IllegalStateException.class, ()-> {
-            studentService.join(student2);
-        });
+        assertThatThrownBy(() -> studentService.join(student2))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("student already exists");
     }
 
     private Department createDepartment(){

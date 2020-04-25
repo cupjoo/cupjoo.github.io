@@ -21,9 +21,9 @@ hidden: true
 
 ### `Framework = Design Pattern + Library (Dependency)`
 
-프레임워크의 정의는 **자주 사용되는 라이브러리 (의존성)** 들이 모여 특정 **디자인 패턴**으로 구성된 것을 말한다. 자바에서는 웹 개발 시 `Spring MVC` 프레임워크를 사용하는데, 현재 가장 많이 사용하는 버전은 3과 4다.
+프레임워크의 정의는 **자주 사용되는 라이브러리 (의존성)** 들이 모여 특정 **디자인 패턴**으로 구성된 것을 말한다. 자바에서는 웹 개발 시 `Spring` 프레임워크를 사용하는데, 현재 가장 많이 사용하는 버전은 3과 4다.
 
-하지만 Spring MVC는 프로젝트 설정과 웹 서버 연동 등이 복잡해 진입 장벽이 높았고, 이런 수요를 반영해 비즈니스 로직 자체에만 집중할 수 있도록 좀 더 가벼운 Spring 프레임워크인 `Spring Boot`가 등장했다.
+하지만 Spring은 프로젝트 설정과 웹 서버 연동 등이 복잡해 진입 장벽이 높았고, 이런 수요를 반영해 비즈니스 로직 자체에만 집중할 수 있도록 좀 더 가벼운 프레임워크인 `Spring Boot`가 등장했다. Spring Boot는 Spring 위에서 동작하지만, 기본적인 설정이나 공통 로직을 사용자가 직접 하지 않아도 자동으로 설정해준다.
 
 ![2.png]({{ site.baseurl }}/assets/images/2020-03-20/2.png)
 
@@ -51,10 +51,6 @@ hidden: true
 Spring Boot는 어플리케이션 실행 시 내장 **WAS (Wep Application Server)** 를 실행한다. 따라서 Tomcat과 같은 외부 WAS 없이도 생성된 Jar 파일만 실행하면 항상 같은 환경의 어플리케이션을 배포할 수 있다.
 
 > 관련 포스트 : [IoC : 오브젝트와 의존관계](https://cupjoo.github.io/IoC-오브젝트와-의존관계)
-
-> 관련 포스트 : [AOP](https://cupjoo.github.io/)
-
-> 관련 포스트 : [PSA](https://cupjoo.github.io/)
 
 ## 2. Gradle
 

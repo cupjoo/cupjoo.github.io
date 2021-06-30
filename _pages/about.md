@@ -4,9 +4,7 @@ title: Junyoung Choi
 permalink: /about
 ---
 
-Software Engineer at
-<br>
-[Republic of Korea Army Ministry of National Defense](https://army.mil.kr/)
+Software Engineer at [Works Mobile](https://naver.worksmobile.com/)  (2021~)
 <br>
 cupjoo@google.com
 
@@ -14,19 +12,13 @@ cupjoo@google.com
 
 B.S. [College of Computer Science & Software](https://cse.cau.ac.kr)
 <br>
-at [ChungAng University, Seoul, South Korea](https://www.cau.ac.kr)
+at [ChungAng University](https://www.cau.ac.kr)
 
 ## Work Experience
 
-- SW 개발병 (2019-)
-- [Algorithm JOBS](https://algorithmjobs.io/) 코치 (2018)
-- 중앙대 리눅스 동아리 CLUG 서버 관리부장 (2018)
-
-## Interests
-
-- Competitive Programming
-- Cloud Computing
-- Full Stack
+- SW 개발병 (2019-2020)
+- [Algorithm JOBS](https://www.algorithmjobs.io/) 코치 (2018)
+- 중앙대 리눅스 동아리 CLUG 서버셀장 (2018)
 
 ## Awards
 
@@ -40,6 +32,5 @@ at [ChungAng University, Seoul, South Korea](https://www.cau.ac.kr)
 
 ## Skills
 
-- Java / Python / C++ / Typescript
-- Spring Boot / Spring Data JPA / Django
-- ReactJS / Redux
+- Java / Python / ES6
+- Spring / JPA / MyBatis / Django

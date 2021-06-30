@@ -6,8 +6,6 @@ categories: [알고리즘, Java]
 image: assets/images/2020-02-03/1.png
 ---
 
-[대회기출로 정리하는 알고리즘 로드맵](https://cupjoo.github.io/대회기출로-정리하는-알고리즘-로드맵)
-
 ---
 
 이번 포스팅은 설명보다는 사용법 위주로 작성하여 Cheetsheet의 용도로 활용할 예정이다. 꼭 필요한 Collection만 정리했다.
